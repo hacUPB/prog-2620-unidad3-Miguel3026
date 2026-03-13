@@ -156,3 +156,12 @@ fin
 
 ## Uso de IA
 Se uso IA para la parte de los print, dando un resultado mas estetico dinamico y corrección de errores de logica en el codigo, como la funcion, que relaciona el viento,  la distancia y el tiempo. haciendonos cambiar de contador, segmentando los tramos en algo dado por el usuario
+
+## Evidencia
+*caso exitoso*
+
+![caso exitoso](/Reto_3/imagenes_reto/Captura%20de%20pantalla%202026-03-13%20153308.png)
+
+*caso fallido*
+
+![caso fallido](/Reto_3/imagenes_reto/Captura%20de%20pantalla%202026-03-13%20152936.png)

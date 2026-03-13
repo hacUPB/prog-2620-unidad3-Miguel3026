@@ -39,7 +39,7 @@
 | nombre | tipo | descripción |
 |------|------|-------------|
 | CKG | float | Combustible consumido durante el tramo en kilogramos |
-| CPF | float | Combustible final proyectado después del tramo |
+| CPF | float | Combustible final después del tramo |
 | VT | float | Velocidad total resultante usada para el cálculo |
 | TT | float | Tiempo calculado para recorrer la distancia |
 | TV | str | Resultado que indica el tipo de viento presente |
@@ -48,6 +48,55 @@
 
 ## Pseudocodigo 
 ````
+funcion CONS_C(D, V, H, CA)
+
+    VT = VC + V
+
+    si VT <= VMS entonces
+        mostrar "alerta critica - entrando en stall"
+        mostrar "velocidad total:", VT
+        mostrar "abortando ruta en tramo", H
+        devolver NULO, VT, NULO, NULO, "STALL"
+    fin si
+
+    TT = D / VT
+
+    si V > 5 entonces
+        CF = FTW
+        TV = "FAVOR"
+    sino
+        si V < -5 entonces
+            CF = FHW
+            TV = "CONTRA"
+        sino
+            CF = 1
+            TV = "NULO"
+        fin si
+    fin si
+
+    CKG = CP * TT * CF
+    CPF = CA - CKG
+
+    si CPF < RL entonces
+        mostrar "alerta critica - combustible insuficiente"
+        mostrar "combustible actual:", CA
+        mostrar "consumo proyectado:", CKG
+        mostrar "combustible final:", CPF
+        mostrar "abortando ruta en tramo", H
+        devolver CKG, VT, TT, TV, "INSUFICIENTE"
+    fin si
+
+    si CPF > RL + 500 entonces
+        EST = "OK"
+    sino
+        EST = "CRITICO"
+    fin si
+
+    devolver CKG, VT, TT, TV, EST
+
+fin funcion
+
+
 inicio
 
 CP = 5400
@@ -58,7 +107,7 @@ VMS = 185
 FHW = 1.25
 FTW = 0.85
 
-mostrar "Sistema de gestion de combustible"
+mostrar "sistema de gestion de combustible del 787"
 
 leer CI
 leer H
@@ -69,49 +118,30 @@ sino
 
     CA = CI
 
-    para i desde 1 hasta H+1
+    para I desde 1 hasta H hacer
 
-        mostrar "tramo ", i
+        mostrar "tramo ", I
 
         leer D
         leer V
 
-        VT = VC + V
+        CKG, VT, TT, TV, EST = CONS_C(D, V, I, CA)
 
-        si VT <= VMS entonces
-            mostrar "alerta: entrando en stall"
-            mostrar "abortando vuelo"
+        si EST == "STALL" o EST == "INSUFICIENTE" entonces
             terminar ciclo
         fin si
 
-        TT = D / VT
-
-        si V > 5 entonces
-            CF = FTW
-            TV = "favor"
-        sino
-            si V < -5 entonces
-                CF = FHW
-                TV = "contra"
-            sino
-                CF = 1
-                TV = "nulo"
-            fin si
-        fin si
-
-        CKG = CP * TT * CF
-        CPF = CA - CKG
-
-        si CPF < RL entonces
-            mostrar "alerta: combustible insuficiente"
-            mostrar "abortando vuelo"
-            terminar ciclo
-        fin si
+        mostrar "consumo:", CKG
 
         CA = CA - CKG
 
-        mostrar "consumo:" CKG
+        mostrar "tramo:", I
+        mostrar "distancia:", D
+        mostrar "viento:", TV
+        mostrar "velocidad total:", VT
+        mostrar "tiempo:", TT
         mostrar "combustible restante:", CA
+        mostrar "estado:", EST
 
     fin para
 

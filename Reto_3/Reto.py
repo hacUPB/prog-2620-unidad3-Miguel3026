@@ -44,11 +44,11 @@ def Cons_C(D, V, H, CA):
         print(f"Buscando aeropuerto mas cercano...\n")
         return CKG, VT, TT, TV, "INSUFICIENTE"
     
-    EST = "OK" if CPF > RL + 500 else "CRITICO"
+    EST = "OK" if CPF > RL + 500 else "CRITICO" #IA
     
     return CKG, VT, TT, TV, EST
 
-# PROGRAMA PRINCIPAL
+
 print("="*80)
 print("SISTEMA DE GESTION DE COMBUSTIBLE del 787 (SMCS) - BIMOTOR COMERCIAL")
 print("="*80)

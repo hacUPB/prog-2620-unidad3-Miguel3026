@@ -4,4 +4,4 @@
 Nombre: Miguel Angel Mejia Loaiza
 ID.: 000257893
 ## Descripción del repositorio
-Reemplace estas líneas por la descripción de su repositorio
+En este repositorio veremos diferentes ejercicios, incluyendo el reto de la unidad en el cual ponemos en practica arios conceptos vistos en clase, en este estos vemos el como usar en "python" los bucles, condicionales, operadores y funciones, su correcta aplicación.

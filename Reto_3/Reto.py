@@ -7,14 +7,6 @@ FHW = 1.25 # Factor headwind (+25% consumo con viento en contra)
 FTW = 0.85 # Factor tailwind (-15% consumo con viento a favor)
 
 def Cons_C(D, V, H, CA):
-    """
-    Calcula consumo de combustible por tramo.
-    D: distancia en km
-    V: velocidad viento (+ favor, - contra)
-    H: numero de tramo
-    CA: combustible actual
-    Retorna: (consumo_kg, velocidad_total, tiempo_tramo, tipo_viento, estado_combustible)
-    """
     VT = VC + V
     
     # Validar velocidad minima segura
@@ -62,7 +54,7 @@ print("SISTEMA DE GESTION DE COMBUSTIBLE del 787 (SMCS) - BIMOTOR COMERCIAL")
 print("="*80)
 
 CI = float(input("\nIngrese cantidad de combustible inicial (kg): "))
-H = int(input("Ingrese cantidad de tramos a volar: "))
+H = int(input("Ingrese cantidad de horas a volar: "))
 
 if CI < RL:
     print(f"ERROR: Combustible insuficiente. Minimo requerido: {RL} kg")
